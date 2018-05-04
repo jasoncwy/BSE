@@ -19,11 +19,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'l*l_dyqu31pu!z&+8rlw%pislp7z!qn+jo177vm_t-*mi6mrn8'
+# SECURITY WARNING: keep the secret key used in production secret! 
+SECRET_KEY = 'zVxVLwVlSawgPA7IEetED6CaKuk3WIOzuLALVH0Yo4WNAuOGdtK5o42nffQXFGjC'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -37,9 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'buysell',
     'accounts',
     'multiselectfield',
+    'disqus',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -76,12 +79,12 @@ WSGI_APPLICATION = 'bse.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -144,3 +147,9 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+#TAGGIT_CASE_INSENSITIVE = True (If you want to make tags case sensitive apply this to true - Default: False)
+
+DISQUS_API_KEY = 'dqhKmcc0fj2hO61uNUZvgCvxbUAd8hFAYiwP1foCFpBeIsLkbKUaX9Eo9Y7uVjtO'
+DISQUS_WEBSITE_SHORTNAME = 'bse'
+SITE_ID = 1

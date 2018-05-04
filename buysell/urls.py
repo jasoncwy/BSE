@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^product/(?P<pk>[0-9]+)/edit/$', login_required(views.ProductUpdate.as_view()), name='product_update'),
     # e.g: /product/3/delete, restricted to logged in users only
     url(r'^product/(?P<pk>[0-9]+)/delete/$', login_required(views.ProductDelete.as_view()), name='product_delete'),
+    url(r'^product/(?P<product_id>\d+)/$', views.product, name = 'product'),
 ]

@@ -37,6 +37,7 @@
         {% if products %}
             <div class="card-columns">
                 {% for product in products %}
+                <a href="/product/{{ product.id }}/">
                 <div class="card">
                     <img class="card-img-top img-fluid" src="{{ product.image.url }}" alt="Card image cap">
                     <div class="card-block">
@@ -49,6 +50,7 @@
                         </p>
                     </div>
                 </div>
+                </a>
                 {% endfor %}
             </div>
             <div class="row justify-content-center">

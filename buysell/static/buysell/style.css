@@ -53,6 +53,20 @@ a.checkbox-category{
     cursor: pointer;
 }
 
+.single {
+    margin-top: 2em;
+    margin-left: 3em;
+    margin-right: 3em;
+}
+
+.textAdjust {
+    margin-left: 5em;
+}
+.product-desc {
+    margin-top: 10px;
+    text-align: left;
+}
+
 @media only screen and (max-width: 767px) {
     .navbar-collapse {
         text-align: center;

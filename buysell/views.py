@@ -8,7 +8,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-from .models import Product, Category
+from .models import Product, Category, User_info
 
 # home page and search view
 class IndexView(generic.ListView):
@@ -56,6 +56,10 @@ class IndexView(generic.ListView):
 class UserProductView(generic.ListView):
     template_name = 'buysell/user_product.html'
     context_object_name = 'products'
+    def get_context_data(self, **kwargs):
+        context = super(UserProductView, self).get_context_data(**kwargs)
+        context['suggestion'] = 'test suggestion'
+        return context
 
     def get_queryset(self):
         return Product.objects.filter(author=self.request.user,).order_by('-modified_date')
@@ -63,7 +67,7 @@ class UserProductView(generic.ListView):
 # product create form for logged in users
 class ProductCreate(CreateView):
     model = Product
-    fields = ['name','price','image','category','product_type','description']
+    fields = ['name','price','image','category','product_type','tags','description']
 
     def form_valid(self, form):
         obj = form.save(commit=False)
@@ -74,7 +78,7 @@ class ProductCreate(CreateView):
 # product updated by user
 class ProductUpdate(UpdateView):
     model = Product
-    fields = ['name','price','image','category','product_type','description']
+    fields = ['name','price','image','category','product_type','tags','description']
     success_url = reverse_lazy('buysell:user_product')
 
     def get_object(self):
@@ -95,3 +99,25 @@ class ProductDelete(DeleteView):
         if not obj.author == self.request.user:
             raise Http404
         return obj
+
+def product(request, product_id):
+    product = Product.objects.filter(id=product_id).first()
+
+    context = {
+         'pid': product_id,
+         'product_description': product,
+         'product': product,
+    }
+    return render(request, 'buysell/single.html', context)
+
+def user_info(request, customerID):
+    user = User_info.objects.values('customerID').distinct()
+
+    context = {
+        'uid' : customerID,
+        'customerName' : user,
+        'location' : user,
+    }
+
+    return render(request, 'buysell/index.html', context)
+

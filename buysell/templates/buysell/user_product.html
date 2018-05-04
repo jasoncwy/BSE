@@ -5,8 +5,9 @@
       <thead>
         <tr>
           <th>Product Name</th>
+          <th>Type</th>
+          <th>Suggestion</th>
           <th>Last Updated</th>
-          <th></th>
           <th></th>
         </tr>
       </thead>
@@ -14,6 +15,8 @@
         {% for product in products %}
         <tr>
           <td>{{ product.name }}</td>
+          <td>{{ product.product_type }}</td>
+          <td>{{ suggestion }}</td>
           <td>{{ product.modified_date }}</td>
           <td>
             <a href="{% url 'buysell:product_update' product.pk %}" class="btn btn-primary">
